@@ -1,7 +1,7 @@
 <?php
 /**
  * A minimalistic API wrapper for SoundCloud written in PHP.
- * For further reference and example of usage see: http://github.com/mptre/PHP-SoundCloud/
+ * For further reference and example of usage see: http://github.com/mptre/php-soundcloud/
  *
  * @author Anton Lindqvist <anton@qvister.se>
  * @version 0.1
@@ -56,6 +56,7 @@ class Soundcloud {
         
         $options[CURLOPT_POSTFIELDS] = ($args['fields']) ? $args['fields'] : '';
       }
+      // Probably more efficient to use a regex here instead.
       elseif (in_array($key, array('comment_id', 'contact_id', 'event_id', 'track_id'))) {
         $options[CURLOPT_URL] .= $args[$key] .'/';
       }
