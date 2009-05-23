@@ -18,7 +18,7 @@ class Soundcloud {
     $this->username = $username;
     $this->password = $password;
     $this->key = $key;
-    $this->me = ($key == 'me') ? true : false;
+    $this->me = ($key == 'me') ? TRUE : FALSE;
     $this->url = 'http://api.sandbox-soundcloud.com';
   }
   
@@ -56,8 +56,7 @@ class Soundcloud {
         
         $options[CURLOPT_POSTFIELDS] = ($args['fields']) ? $args['fields'] : '';
       }
-      // Probably more efficient to use a regex here instead.
-      elseif (in_array($key, array('comment_id', 'contact_id', 'event_id', 'track_id'))) {
+      elseif (preg_match('/[^[user]]{0}_id$/', $key)) {
         $options[CURLOPT_URL] .= $args[$key] .'/';
       }
     }
@@ -71,7 +70,7 @@ class Soundcloud {
     $meta = curl_getinfo($ch);
     
     if (in_array($meta['http_code'], array(200, 201, 303))) {
-      return (strlen($data) <= 1) ? true : $data;
+      return (strlen($data) <= 1) ? TRUE : $data;
     } else {
       // Throw error.
       throw new SoundcloudException(sprintf('Response code: %d from %s', $meta['http_code'], $options[CURLOPT_URL]));
@@ -79,11 +78,11 @@ class Soundcloud {
   }
   
   public function __destruct() {
-    $this->username = null;
-    $this->password = null;
-    $this->key = null;
-    $this->me = null;
-    $this->url = null;
+    $this->username = NULL;
+    $this->password = NULL;
+    $this->key = NULL;
+    $this->me = NULL;
+    $this->url = NULL;
   }
 }
 
