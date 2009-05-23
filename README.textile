@@ -120,7 +120,7 @@ $soundcloud->tracks->basic(
 );
 
 // Update a track.
-$soundcloud->track->basic(
+$soundcloud->tracks->basic(
   array(
     'put' => TRUE,
     'track_id' => 1,
@@ -131,7 +131,7 @@ $soundcloud->track->basic(
 );
 
 // Delete a track.
-$soundcloud->track->basic(
+$soundcloud->tracks->basic(
   array(
     'delete' => TRUE,
     'track_id' => 1
@@ -139,14 +139,14 @@ $soundcloud->track->basic(
 );
 
 // Get a track comments.
-$soundcloud->track->comments(
+$soundcloud->tracks->comments(
   array(
     'track_id' => 1
   )
 );
 
 // Post a new comment to the given track.
-$soundcloud->track->comments(
+$soundcloud->tracks->comments(
   array(
     'post' => TRUE,
     'track_id' => 1,
