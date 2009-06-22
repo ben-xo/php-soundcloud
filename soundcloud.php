@@ -1,8 +1,9 @@
 <?php
 /**
  * A minimalistic API wrapper for SoundCloud written in PHP.
- * For further reference and example of usage see: http://github.com/mptre/php-soundcloud/
+ * For further reference and example of usage see link below.
  *
+ * @link http://github.com/mptre/php-soundcloud/
  * @author Anton Lindqvist <anton@qvister.se>
  * @version 0.1.1
  */
