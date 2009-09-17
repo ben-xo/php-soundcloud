@@ -1,0 +1,185 @@
+h1. SoundCloud PHP API wrapper
+
+A minimalistic API wrapper for "SoundCloud":http://soundcloud.com/ written in PHP.
+Inspired by "tcdent":http://github.com/tcdent "Twitter API class":http://github.com/tcdent/php-twitter/.
+
+So far the supported and tested methods are comments, users and tracks.
+All methods will be supported in the near future.
+
+h2. Example of usage
+
+All responses are XML-formated. I would recommend SimpleXMLElement to parse them.
+
+h3. Users
+
+<pre>
+<code>
+<?php
+$soundcloud = new Soundcloud('username', 'password');
+
+// Get the authenticated user.
+$soundcloud->me->basic();
+
+// Get the authenticated user comments.
+$soundcloud->me->comments();
+
+// Get the authenticated user contacts.
+$soundcloud->me->contacts();
+
+// Add a new contact.
+$soundcloud->me->contacts(
+  array(
+    'contact_id' => 1,
+    'put' => TRUE
+  )
+);
+
+// Delete a contact.
+$soundcloud->me->contacts(
+  array(
+    'contact_id' => 1,
+    'delete' => TRUE
+  )
+);
+
+// Get the authenticated user tracks.
+$soundcloud->me->tracks();
+
+// Get the authenticated user fans.
+$soundcloud->me->fans();
+
+// Get the authenticated user favorites.
+$soundcloud->me->favorites();
+
+// Add a new favorite track.
+$soundcloud->me->favorites(
+  array(
+    'track_id' => 1,
+    'put' => TRUE
+  )
+);
+
+// Delete a favorite track.
+$soundcloud->me->favorites(
+  array(
+    'track_id' => 1,
+    'delete' => TRUE
+  )
+);
+?>
+</code>
+</pre>
+Note that you can perform most of these actions with other users.
+This is done by replacing "me" with users and simply add the key "user_id" to the array of arguments.
+Here's an example.
+<pre>
+<code>
+<?php
+$soundcloud->users->tracks(
+  array(
+    'user_id' => 1
+  )
+);
+?>
+</code>
+</pre>
+
+h3. Tracks
+
+<pre>
+<code>
+<?php
+$soundcloud = new Soundcloud('username', 'password');
+
+// Search for tracks.
+$soundcloud->tracks->basic(
+  array(
+    'query' => array(
+      'filter' => 'downloadable',
+      'orderby' => 'hotness'
+    )
+  )
+);
+
+// Get the given track.
+$soundcloud->tracks->basic(
+  array(
+    'track_id' => 1
+  )
+);
+
+// Upload a new track.
+$soundcloud->tracks->basic(
+  array(
+    'post' => TRUE,
+    'fields' => array(
+      'track[title]' => 'API calling',
+      'track[asset_data]' => '@my_track.mp3'
+    )
+  )
+);
+
+// Update a track.
+$soundcloud->tracks->basic(
+  array(
+    'put' => TRUE,
+    'track_id' => 1,
+    'fields' => array(
+      'track[downloadable]' => 'true'
+    )
+  )
+);
+
+// Delete a track.
+$soundcloud->tracks->basic(
+  array(
+    'delete' => TRUE,
+    'track_id' => 1
+  )
+);
+
+// Get a track comments.
+$soundcloud->tracks->comments(
+  array(
+    'track_id' => 1
+  )
+);
+
+// Post a new comment to the given track.
+$soundcloud->tracks->comments(
+  array(
+    'post' => TRUE,
+    'track_id' => 1,
+    'fields' => array(
+      'comment[body]' => 'Awesome track!'
+    )
+  )
+);
+?>
+</code>
+</pre>
+
+h3. Comments
+
+<pre>
+<code>
+<?php
+$soundcloud = new Soundcloud('username', 'password');
+
+// Get the given comment.
+$soundcloud->comments->basic(
+  array(
+    'comment_id' => 1
+  )
+);
+
+// Delete the given comment.
+$soundcloud->comments->basic(
+  array(
+    'delete' => TRUE,
+    'comment_id' => 1
+  )
+);
+?>
+</code>
+</pre>
