@@ -1,0 +1,9 @@
+h2. SoundCloud PHP API Wrapper
+
+API Wrapper for SoundCloud written in PHP with support for authication using OAuth (1.0a). Based on Andy Smiths "OAuth library":http://oauth.googlecode.com/svn/code/php, inspired by Abraham Williams "twitteroauth":http://github.com/abraham/twitteroauth library and a big applause for "Hugo Wetterberg":http://github.com/hugowetterberg for helping me out big time!
+
+There's a simple "demo application":http://soundcloud.qvister.se available which should show how to do the "OAuth dance" with this wrapper. The code for the demo application is included in the repository. If you're new to OAuth I'd recommend to have a look at the "official docs":http://oauth.net.
+
+The old wrapper (i.e username + password method) is by now deprecated but still available in the repository for various reasons.
+
+Got questions or need support? Don't hesitate to contact me!

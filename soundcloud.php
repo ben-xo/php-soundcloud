@@ -1,6 +1,6 @@
 <?php
 /**
- * A API Wrapper for SoundCloud written in PHP with support for authication using OAuth.
+ * API Wrapper for SoundCloud written in PHP with support for authication using OAuth.
  *
  * @author Anton Lindqvist <anton@qvister.se>
  * @version 1.0
