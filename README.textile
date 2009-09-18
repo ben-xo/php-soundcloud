@@ -12,7 +12,7 @@ Got questions or need support? Don't hesitate to contact me!
 
 h3. Example of usage
 
-saThis is a very basic demo of how the "OAuth dance" is performed. Note that you don't have to store the tokens as session variables, it's just for the sake of simplicity. For further reference I'd recommend you to take a look at the demo code, included in this repository.
+This is a very basic demo of how the "OAuth dance" is performed. Note that you don't have to store the tokens as session variables, it's just for the sake of simplicity. For further reference I'd recommend you to take a look at the demo code, included in this repository.
 
 <pre>
 <code>
