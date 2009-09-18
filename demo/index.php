@@ -74,7 +74,7 @@ if (isset($oauth_token) && isset($oauth_request_token) && isset($oauth_request_t
         $mime = (isset($mimes[$extension])) ? $mimes[$extension] : NULL;
 
         if (isset($mime)) {
-            $tmp_file = 'demo/tmp/' . $_FILES['file']['name'];
+            $tmp_file = $tmp_path . $_FILES['file']['name'];
 
             // Store the track temporary.
             if (move_uploaded_file($_FILES['file']['tmp_name'], $tmp_file)) {
