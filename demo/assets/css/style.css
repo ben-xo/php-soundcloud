@@ -1,0 +1,169 @@
+html,body {
+background: #fff url(../images/body.png) repeat-x top left;
+font: normal 100% "Lucida Grande", Helvetica, Arial, sans-serif;
+color: #333;
+}
+a {
+color: #06c;
+text-decoration: none;
+}
+a:hover {
+color: #f60;
+}
+h2 {
+font-size: 1.5em;
+margin: 0 0 7px 0;
+}
+
+/* Begin content
+---------------------------------------------- */
+#content {
+background: #fff;
+height: auto;
+width: 320px;
+margin: 28px auto 0 auto;
+padding: 20px;
+font-size: .75em;
+border: 1px solid #ccc;
+-moz-border-radius-bottomright: 21px;
+-webkit-border-bottom-right-radius: 21px;
+-moz-border-radius-topleft: 21px;
+-webkit-border-top-left-radius: 21px;
+}
+#content a.logout {
+float: right;
+position: relative;
+top: -18px;
+left: 15px;
+}
+#content form label {
+margin: 0 0 2px 0;
+display: block;
+cursor: pointer;
+}
+#content input.text {
+background: #fff;
+height: 20px;
+width: 316px;
+padding: 2px 2px 0 2px;
+cursor: pointer;
+border: 1px solid #ccc;
+-moz-border-radius-topleft: 7px;
+-webkit-border-top-left-radius: 7px;
+-moz-border-radius-bottomright: 7px;
+-webkit-border-bottom-right-radius: 7px;
+}
+#content input.submit {
+background: #fff url(../images/a.png) repeat-x top left;
+height: 19px;
+width: 65px;
+margin: 10px 0 0 0;
+text-align: center;
+line-height: 19px;
+color: #333;
+border: 1px solid #ccc;
+-moz-border-radius: 10px;
+cursor: pointer;
+}
+#content input.submit:hover {
+background-position: bottom left;
+color: #06c;
+}
+#content p {
+margin: 0 0 7px 0;
+}
+/* End content
+---------------------------------------------- */
+
+/* Begin header
+---------------------------------------------- */
+#header {
+margin: 0 0 20px 0;
+border-bottom: 1px solid #ccc;
+}
+#header h1 {
+background: #fff url(../images/logo.png) no-repeat top center;
+width: 320px;
+padding: 138px 0 15px 0;
+text-align: center;
+font-size: 1.75em;
+color: #06c;
+}
+/* End header
+---------------------------------------------- */
+
+/* Begin profile
+---------------------------------------------- */
+#profile {
+margin: 0 0 20px 0;
+}
+#profile h2 {
+margin: 0;
+font-size: 2em;
+}
+#profile div.left {
+height: 75px;
+width: 75px;
+float: left;
+display: inline;
+}
+#profile div.left div.avatar {
+background: transparent url(../images/avatar.png) no-repeat top left;
+height: 75px;
+width: 75px;
+margin: -85px 0 0 0;
+position: absolute;
+}
+#profile div.right {
+height: 75px;
+width: 235px;
+float: right;
+display: inline;
+}
+/* End profile
+---------------------------------------------- */
+
+/* Begin generic
+---------------------------------------------- */
+.button {
+background: #fff url(../images/a.png) repeat-x top left;
+height: 19px;
+width: 320px;
+text-align: center;
+line-height: 19px;
+color: #333;
+border: 1px solid #ccc;
+display: block;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+}
+.button:hover {
+background-position: bottom left;
+color: #06c;
+}
+.clear {
+clear: both;
+}
+.center {
+text-align: center;
+}
+#message {
+background: #ffeac8;
+margin: 20px 0 0 0;
+padding: 5px;
+color: #ff6600;
+border: 1px solid #ff6600;
+-moz-border-radius-topleft: 7px;
+-moz-border-radius-bottomright: 7px;
+-webkit-border-top-left-radius: 7px;
+-webkit-border-bottom-right-radius: 7px;
+}
+#message a {
+color: #ff6600;
+text-decoration: underline;
+}
+#message p {
+margin: 0;
+}
+/* End generic
+---------------------------------------------- */
