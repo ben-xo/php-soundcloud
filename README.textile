@@ -1,5 +1,7 @@
 h2. SoundCloud PHP API Wrapper
 
+h3. Introduction
+
 API Wrapper for SoundCloud written in PHP with support for authication using OAuth (1.0a). Based on Andy Smiths "OAuth library":http://oauth.googlecode.com/svn/code/php, inspired by Abraham Williams "twitteroauth":http://github.com/abraham/twitteroauth library and a big applause for "Hugo Wetterberg":http://github.com/hugowetterberg for helping me out big time!
 
 There's a simple "demo application":http://soundcloud.qvister.se available which should show how to do the "OAuth dance" with this wrapper. The code for the demo application is included in the repository. If you're new to OAuth I'd recommend to have a look at the "official docs":http://oauth.net.
@@ -7,3 +9,65 @@ There's a simple "demo application":http://soundcloud.qvister.se available which
 The old wrapper (i.e username + password method) is by now deprecated but still available in the repository for various reasons.
 
 Got questions or need support? Don't hesitate to contact me!
+
+h3. Example of usage
+
+saThis is a very basic demo of how the "OAuth dance" is performed. Note that you don't have to store the tokens as session variables, it's just for the sake of simplicity. For further reference I'd recommend you to take a look at the demo code, included in this repository.
+
+<pre>
+<code>
+<?php
+require_once 'oauth.php';
+require_once 'soundcloud.php';
+
+// Register your app over SoundCloud and replace the three values below.
+$consumer_key = 'your-consumer-key';
+$consumer_secret = 'your-consumer-secret';
+$callback_url = 'your-callback-url';
+
+// Variables used for verifying the status of the "OAuth dance".
+$oauth_token = (isset($_GET['oauth_verifier']))
+    ? $_GET['oauth_verifier']
+    : ((isset($_SESSION['oauth_access_token'])) ? $_SESSION['oauth_access_token'] : NULL);
+$oauth_request_token = (isset($_SESSION['oauth_request_token']))
+    ? $_SESSION['oauth_request_token']
+    : NULL;
+$oauth_request_token_secret = (isset($_SESSION['oauth_request_token_secret']))
+    ? $_SESSION['oauth_request_token_secret']
+    : NULL;
+
+if (empty($oauth_token) && empty($oauth_request_token) && empty($oauth_request_token_secret)) {
+    // This is the first step in the "OAuth dance" where we ask the visitior to authicate himself.
+    $soundcloud = new Soundcloud($consumer_key, $consumer_secret);
+    $token = $soundcloud->get_request_token($callback_url);
+
+    $_SESSION['oauth_request_token'] = $token['oauth_token'];
+    $_SESSION['oauth_request_token_secret'] = $token['oauth_token_secret'];
+
+    $login = $soundcloud->get_authorize_url($token['oauth_token']);
+} else {
+    // This is the second step in the "OAuth dance". Where we ask for access tokens
+    // after the user has authicated himself using the generated authorize url.
+    if (!isset($_SESSION['oauth_access_token']) && !isset($_SESSION['oauth_access_token_secret'])) {
+        $soundcloud = new Soundcloud(
+            $consumer_key,
+            $consumer_secret,
+            $_SESSION['oauth_request_token'],
+            $_SESSION['oauth_request_token_secret']
+        );
+        $token = $soundcloud->get_access_token($oauth_token);
+        $_SESSION['oauth_access_token'] = $token['oauth_token'];
+        $_SESSION['oauth_access_token_secret'] = $token['oauth_token_secret'];
+    }
+
+    // Construct a fully authicated connection with SoundCloud.
+    $soundcloud = new Soundcloud(
+        $consumer_key,
+        $consumer_secret,
+        $_SESSION['oauth_access_token'],
+        $_SESSION['oauth_access_token_secret']
+    );
+}
+?>
+</code>
+</pre>
