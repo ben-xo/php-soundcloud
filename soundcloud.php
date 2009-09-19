@@ -66,7 +66,7 @@ class Soundcloud {
         $crlf = "\r\n";
         $headers = array(
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'Content-Length' => '%d'
+            'Content-Length' => 0
         );
 
         foreach ($post_data as $key => $val) {
@@ -85,7 +85,7 @@ class Soundcloud {
         }
 
         $body .= '--' . $boundary . '--' . $crlf;
-        $headers['Content-Length'] = sprintf($headers['Content-Length'], strlen($body));
+        $headers['Content-Length'] += strlen($body);
 
         return $this->request('tracks', 'POST', $body, $headers);
     }
