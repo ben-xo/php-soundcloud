@@ -142,8 +142,8 @@ class Soundcloud {
         $headers = (is_array($headers)) ? $this->_build_header($headers) : array();
         $options = array(
             CURLOPT_URL => $url,
-            CURLOPT_HEADER => 0,
-            CURLOPT_RETURNTRANSFER => 1
+            CURLOPT_HEADER => FALSE,
+            CURLOPT_RETURNTRANSFER => TRUE
         );
 
         if (in_array($request->get_normalized_http_method(), array('DELETE', 'PUT'))) {
@@ -155,7 +155,7 @@ class Soundcloud {
             $options[CURLOPT_POSTFIELDS] = (is_array($post_data) && count($post_data) == 1)
                 ? ((isset($post_data[0])) ? $post_data[0] : $post_data)
                 : $post_data;
-            $options[CURLOPT_POST] = 1;
+            $options[CURLOPT_POST] = TRUE;
         }
 
         $headers[] = $request->to_header();
