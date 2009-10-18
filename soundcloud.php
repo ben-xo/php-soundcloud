@@ -189,11 +189,11 @@ class Soundcloud {
 
     private function _parse_response($response) {
         $return = array();
-        $response = split('[&]+', $response);
+        $response = explode('&', $response);
 
         foreach ($response as $r) {
             if (strstr($r, '=')) {
-                list($key, $val) = split('=', $r);
+                list($key, $val) = explode('=', $r);
 
                 if (!empty($key) && !empty($val)) {
                     $return[urldecode($key)] = urldecode($val);
