@@ -3,10 +3,11 @@
  * API Wrapper for SoundCloud written in PHP with support for authication using OAuth.
  *
  * @author Anton Lindqvist <anton@qvister.se>
- * @version 1.0
+ * @version 1.1
  * @link http://github.com/mptre/php-soundcloud/
  */
 class Soundcloud {
+    const VERSION = '1.1';
     const URL_API = 'http://api.soundcloud.com/';
     const URL_OAUTH = 'http://api.soundcloud.com/oauth/';
 
@@ -139,6 +140,9 @@ class Soundcloud {
     private function _curl($url, $request, $post_data = NULL, $headers = NULL) {
         $ch = curl_init();
         $mime = (stristr($headers['Content-Type'], 'multipart/form-data')) ? TRUE : FALSE;
+        $headers['User-Agent'] = (isset($headers['User-Agent']))
+            ? $headers['User-Agent']
+            : 'PHP SoundCloud/' . self::VERSION;
         $headers = (is_array($headers)) ? $this->_build_header($headers) : array();
         $options = array(
             CURLOPT_URL => $url,
