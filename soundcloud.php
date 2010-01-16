@@ -7,18 +7,19 @@
  * @link http://github.com/mptre/php-soundcloud/
  */
 class Soundcloud {
+
     const VERSION = '1.1';
     const URL_API = 'http://api.soundcloud.com/';
     const URL_OAUTH = 'http://api.soundcloud.com/oauth/';
 
-    function __construct($consumer_key, $consumer_secret, $oauth_token = NULL, $oauth_token_secret = NULL) {
+    function __construct($consumer_key, $consumer_secret, $oauth_token = null, $oauth_token_secret = null) {
         $this->sha1_method = new OAuthSignatureMethod_HMAC_SHA1();
         $this->consumer = new OAuthConsumer($consumer_key, $consumer_secret);
 
         if (!empty($oauth_token) && !empty($oauth_token_secret)) {
             $this->token = new OAuthConsumer($oauth_token, $oauth_token_secret);
         } else {
-            $this->token = NULL;
+            $this->token = null;
         }
     }
 
@@ -61,7 +62,7 @@ class Soundcloud {
         return $token;
     }
 
-    function upload_track($post_data, $asset_data_mime = NULL, $artwork_data_mime = NULL) {
+    function upload_track($post_data, $asset_data_mime = null, $artwork_data_mime = null) {
         $body = '';
         $boundary = '---------------------------' . md5(rand());
         $crlf = "\r\n";
@@ -91,7 +92,7 @@ class Soundcloud {
         return $this->request('tracks', 'POST', $body, $headers);
     }
 
-    function request($resource, $method = 'GET', $args = array(), $headers = NULL) {
+    function request($resource, $method = 'GET', $args = array(), $headers = null) {
         if (!preg_match('/http:\/\//', $resource)) {
             $url = self::URL_API . $resource;
         } else {
@@ -99,11 +100,11 @@ class Soundcloud {
         }
 
         if (stristr($headers['Content-Type'], 'multipart/form-data')) {
-            $body = FALSE;
+            $body = false;
         } elseif (stristr($headers['Content-Type'], 'application/xml')) {
-            $body = FALSE;
+            $body = false;
         } else {
-            $body = TRUE;
+            $body = true;
         }
 
         $request = OAuthRequest::from_consumer_and_token(
@@ -111,7 +112,7 @@ class Soundcloud {
             $this->token,
             $method,
             $url,
-            ($body === TRUE) ? $args : NULL
+            ($body === true) ? $args : null
         );
         $request->sign_request($this->sha1_method, $this->consumer, $this->token);
 
@@ -137,17 +138,17 @@ class Soundcloud {
         }
     }
 
-    private function _curl($url, $request, $post_data = NULL, $headers = NULL) {
+    private function _curl($url, $request, $post_data = null, $headers = null) {
         $ch = curl_init();
-        $mime = (stristr($headers['Content-Type'], 'multipart/form-data')) ? TRUE : FALSE;
+        $mime = (stristr($headers['Content-Type'], 'multipart/form-data')) ? true : false;
         $headers['User-Agent'] = (isset($headers['User-Agent']))
             ? $headers['User-Agent']
             : 'PHP SoundCloud/' . self::VERSION;
         $headers = (is_array($headers)) ? $this->_build_header($headers) : array();
         $options = array(
             CURLOPT_URL => $url,
-            CURLOPT_HEADER => FALSE,
-            CURLOPT_RETURNTRANSFER => TRUE
+            CURLOPT_HEADER => false,
+            CURLOPT_RETURNTRANSFER => true
         );
 
         if (in_array($request->get_normalized_http_method(), array('DELETE', 'PUT'))) {
@@ -155,11 +156,11 @@ class Soundcloud {
             $options[CURLOPT_POSTFIELDS] = '';
         }
 
-        if (is_array($post_data) && count($post_data) > 0 || $mime === TRUE) {
+        if (is_array($post_data) && count($post_data) > 0 || $mime === true) {
             $options[CURLOPT_POSTFIELDS] = (is_array($post_data) && count($post_data) == 1)
                 ? ((isset($post_data[0])) ? $post_data[0] : $post_data)
                 : $post_data;
-            $options[CURLOPT_POST] = TRUE;
+            $options[CURLOPT_POST] = true;
         }
 
         $headers[] = $request->to_header();
@@ -205,6 +206,7 @@ class Soundcloud {
             }
         }
 
-        return (count($return) > 0) ? $return : FALSE;
+        return (count($return) > 0) ? $return : false;
     }
+
 }
